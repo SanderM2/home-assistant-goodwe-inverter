@@ -1,16 +1,16 @@
 {
   "domain": "goodwe",
-  "name": "GoodWe Inverter",
+  "name": "GoodWe Inverter (AKKE)",
   "codeowners": [
     "@mletenay",
     "@starkillerOG",
     "@fizcris"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/mletenay/home-assistant-goodwe-inverter",
+  "documentation": "https://github.com/SanderM2/home-assistant-goodwe-inverter",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/mletenay/home-assistant-goodwe-inverter/issues",
+  "issue_tracker": "https://github.com/SanderM2/home-assistant-goodwe-inverter/issues",
   "loggers": ["goodwe"],
   "requirements": ["goodwe==0.4.8"],
-  "version": "0.9.9.28"
+  "version": "1.9.9.28"
 }
