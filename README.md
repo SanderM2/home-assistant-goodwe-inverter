@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/mletenay/home-assistant-goodwe-inverter/actions/workflows/hassfest.yaml/badge.svg)](https://github.com/mletenay/home-assistant-goodwe-inverter/actions/workflows/hassfest.yaml)
 ![GitHub Release](https://img.shields.io/github/v/release/mletenay/home-assistant-goodwe-inverter)
 
-## GoodWe solar inverter for Home Assistant (experimental)
+## GoodWe solar inverter for Home Assistant (experimental + GW10K-BT fixes)
 
 Support for Goodwe solar inverters is present as native integration of [Home Assistant](https://www.home-assistant.io/integrations/goodwe/) since its release 2022.2 and is recommended for most users.
 
