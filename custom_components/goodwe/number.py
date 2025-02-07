@@ -99,7 +99,7 @@ NUMBERS = (
         native_max_value=99,
         getter=lambda inv: get_offgrid_battery_dod(inv),
         mapper=lambda v: v,
-        setter=lambda inv, val: get_offgrid_battery_dod(inv, val),
+        setter=lambda inv, val: set_offgrid_battery_dod(inv, val),
         filter=lambda inv: True,
     ),
     GoodweNumberEntityDescription(
