@@ -36,15 +36,14 @@ class GoodweNumberEntityDescription(NumberEntityDescription):
 def _get_setting_unit(inverter: Inverter, setting: str) -> str:
     """Return the unit of an inverter setting."""
     return next((s.unit for s in inverter.settings() if s.id_ == setting), "")
-    
-async def set_offline_battery_dod(inverter: Inverter, dod: int) -> None:
-    """Sets offline battery dod - dod for backup output. We do not allow setting it below 5%"""
-    if 5 <= dod <= 100:
-        await inverter.write_setting('battery_discharge_depth_offline', dod)
 
-async def get_offline_battery_dod(inverter: Inverter) -> int:
-    """Returns offline battery dod - dod for backup output"""
-    return (await inverter.read_setting('battery_discharge_depth_offline'))
+
+async def get_offgrid_battery_dod(inverter: Inverter) -> int:
+    return 100 - await inverter.read_setting('battery_discharge_depth_offline')
+    
+async def set_offgrid_battery_dod(inverter: Inverter, dod: int) -> None:
+    if 0 <= dod <= 100:
+        await inverter.write_setting('battery_discharge_depth_offline', 100 - dod)
 
 NUMBERS = (
     # Only one of the export limits are added.
@@ -85,9 +84,9 @@ NUMBERS = (
         native_step=1,
         native_min_value=0,
         native_max_value=99,
-        getter=lambda inv: 100  - inv.get_ongrid_battery_dod(),
+        getter=lambda inv: inv.get_ongrid_battery_dod(),
         mapper=lambda v: v,
-        setter=lambda inv, val: inv.set_ongrid_battery_dod(100 - val),
+        setter=lambda inv, val: inv.set_ongrid_battery_dod(val),
         filter=lambda inv: True,
     ),
     GoodweNumberEntityDescription(
@@ -98,9 +97,9 @@ NUMBERS = (
         native_step=1,
         native_min_value=0,
         native_max_value=99,
-        getter=lambda inv: get_offline_battery_dod(inv),
+        getter=lambda inv: get_offgrid_battery_dod(inv),
         mapper=lambda v: v,
-        setter=lambda inv, val: set_offline_battery_dod(inv, val),
+        setter=lambda inv, val: get_offgrid_battery_dod(inv, val),
         filter=lambda inv: True,
     ),
     GoodweNumberEntityDescription(
